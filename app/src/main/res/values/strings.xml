@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BookCase1</string>
+
+    <string-array name="books">
+        <item>Cinderella</item>
+        <item>Little Red Riding Hood</item>
+        <item>Beauty and the Beast</item>
+        <item>Anivia</item>
+        <item>Ashe</item>
+        <item>Syndra</item>
+        <item>Katarina</item>
+        <item>Lord of the Rings</item>
+        <item>Harry Potter</item>
+        <item>Morrowind</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
