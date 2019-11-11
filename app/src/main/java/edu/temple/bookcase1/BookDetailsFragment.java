@@ -37,6 +37,7 @@ public class BookDetailsFragment extends Fragment {
 
 
         Bundle bundle = getArguments();
+
         if(bundle != null){
             title = bundle.getString(TITLE_KEY);
             this.DisplayBook(title);
