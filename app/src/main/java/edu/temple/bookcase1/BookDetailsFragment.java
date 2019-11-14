@@ -21,10 +21,16 @@ public class BookDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    Book book;
     TextView textView;
+    TextView titleView;
+    TextView authorView;
+    TextView publishedView;
+    TextView URLView;
+
     final static String TITLE_KEY = "title";
     private String title;
-    int position =0;
+    int position = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,13 +40,22 @@ public class BookDetailsFragment extends Fragment {
 
 
         textView = view.findViewById(R.id.textViewDetails);
+        titleView = view.findViewById(R.id.titleView);
+        authorView = view.findViewById(R.id.authorView);
+        publishedView = view.findViewById(R.id.publishedView);
+        URLView = view.findViewById(R.id.URLView);
+
+        titleView.setText(book.getTitle());
+        authorView.setText(book.getAuthor());
+        publishedView.setText(book.getPublished());
+        URLView.setText(book.getCoverURL());
 
 
         Bundle bundle = getArguments();
 
         if(bundle != null){
             title = bundle.getString(TITLE_KEY);
-            this.DisplayBook(title);
+            this.DisplayBook(book);
         }
 
         // Inflate the layout for this fragment
@@ -50,22 +65,32 @@ public class BookDetailsFragment extends Fragment {
 
     }
     //displays the book title
-    public void DisplayBook(String title){
+    public void DisplayBook(Book book){
 
         //TextView textView;
+        this.book = book;
+
+
+
+        //sets the text for each textview
+        titleView.setText(book.getTitle());
+        authorView.setText(book.getAuthor());
+        publishedView.setText(book.getPublished());
+        URLView.setText(book.getCoverURL());
+
 
         textView.setText(title);
         textView.setTextSize(20);
 
     }
-    public static BookDetailsFragment newInstance(String title){
+    public static BookDetailsFragment newInstance(Book book){
 
         BookDetailsFragment bookDetailsFragment = new BookDetailsFragment();
 
         Bundle bundle = new Bundle();
 
 
-        bundle.putString(TITLE_KEY,title);
+        bundle.putParcelable(TITLE_KEY,book);
         bookDetailsFragment.setArguments(bundle);
 
         //Bundle bundle = new Bundle();

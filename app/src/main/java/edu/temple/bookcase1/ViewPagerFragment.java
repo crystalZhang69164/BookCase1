@@ -25,8 +25,11 @@ public class ViewPagerFragment extends Fragment {
 
 
     ArrayList<BookDetailsFragment> bookDetailsFragmentArrayList;
-    String[] title;
+    //String[] title;
+    ArrayList<Book> books;
+
     final static String TITLE_KEY = "title";
+    final static String BOOK_KEY = "books";
     Context parent;
 
     @Override
@@ -36,7 +39,8 @@ public class ViewPagerFragment extends Fragment {
         Bundle bundle = getArguments();
 
         if(bundle != null){
-            title = bundle.getStringArray(TITLE_KEY);
+            //title = bundle.getStringArray(TITLE_KEY);
+            books = bundle.getParcelableArrayList(BOOK_KEY);
         }
 
     }
@@ -48,13 +52,13 @@ public class ViewPagerFragment extends Fragment {
         parent = context;
     }
 
-    public static ViewPagerFragment newInstance (String[] title){
+    public static ViewPagerFragment newInstance (ArrayList<Book> book){
         ViewPagerFragment viewPagerFragment = new ViewPagerFragment();
 
         Bundle bundle = new Bundle();
 
 
-        bundle.putStringArray(TITLE_KEY,title);
+        bundle.putParcelableArrayList(BOOK_KEY,book);
         viewPagerFragment.setArguments(bundle);
 
         return viewPagerFragment;
@@ -71,9 +75,9 @@ public class ViewPagerFragment extends Fragment {
 
 
         //
-        for(int i = 0; i<title.length; i++){
+        for(int i = 0; i<books.size(); i++){
 
-            BookDetailsFragment bookFragment = BookDetailsFragment.newInstance(title[i]);
+            BookDetailsFragment bookFragment = BookDetailsFragment.newInstance(books.get(i));
             bookDetailsFragmentArrayList.add(bookFragment);
         }
         //gets the reference to the view pager

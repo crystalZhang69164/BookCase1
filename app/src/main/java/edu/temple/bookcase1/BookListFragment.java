@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +30,7 @@ public class BookListFragment extends Fragment {
 
 
     final static String BOOK_KEY = "books";
-    private String[] books;
+    private ArrayList<Book> books;
     Context parent;
 
 
@@ -40,7 +42,7 @@ public class BookListFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if(bundle != null){
-            books = bundle.getStringArray(BOOK_KEY);
+            books = bundle.getParcelableArrayList(BOOK_KEY);
         }
     }
 
@@ -81,7 +83,7 @@ public class BookListFragment extends Fragment {
             @Override
             //the title of the books at index position
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((BookSelectedInterface) BookListFragment.this.parent).bookSelected(books[position]);
+                ((BookSelectedInterface) BookListFragment.this.parent).bookSelected(books.get(position));
             }
         });
         return view;
@@ -89,11 +91,11 @@ public class BookListFragment extends Fragment {
         //return inflater.inflate(R.layout.fragment_book_list, container, false);
     }
     //create an instance of the booklist fragment
-    public static BookListFragment newInstance(String[] books){
+    public static BookListFragment newInstance(ArrayList<Book> books){
         BookListFragment bookListFragment = new BookListFragment();
         Bundle bundle = new Bundle();
 
-        bundle.putStringArray(BOOK_KEY,books);
+        bundle.putParcelableArrayList(BOOK_KEY,books);
 
         bookListFragment.setArguments(bundle);
 
@@ -102,7 +104,7 @@ public class BookListFragment extends Fragment {
 
 
     interface BookSelectedInterface {
-        void bookSelected(String title);
+        void bookSelected(Book book);
     }
 
 

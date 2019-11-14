@@ -1,8 +1,11 @@
 package edu.temple.bookcase1;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Book {
+public class Book implements Parcelable {
 
     int id;
     String title;
@@ -19,6 +22,27 @@ public class Book {
         this.coverURL = coverURL;
 
     }
+
+    protected Book(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        author = in.readString();
+        published = in.readInt();
+        coverURL = in.readString();
+        bookArrayList = in.createTypedArrayList(Book.CREATOR);
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
 
     //getters and setters
     public int getId() {
@@ -64,4 +88,18 @@ public class Book {
     ArrayList<Book> bookArrayList = new ArrayList<Book>();
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(title);
+        dest.writeString(author);
+        dest.writeString(coverURL);
+        dest.writeInt(published);
+
+    }
 }
